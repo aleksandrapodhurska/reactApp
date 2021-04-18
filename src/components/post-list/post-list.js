@@ -1,27 +1,20 @@
 import React from 'react';
 import PostListItem from '../post-list-item';
 
-const PostList = ({posts}) => {
+const PostList = ({posts, onDelete}) => {
 
     const elements = posts.map( (item) => {
-        if (typeof item === 'object' && IsEmpty(item) && item !== null && !Array.isArray(item)) {
+        if (typeof item === 'object' && item !== null && item.label && item.label !== '') {
         const {id, ...itemProps} = item;
         return (
             <li key={id} className='list-group-item'>
-                <PostListItem {...itemProps}/>
+                <PostListItem
+                    onDelete={() => onDelete(id)}
+                    {...itemProps}/>
             </li>
         )
-    } else return null
+        } return false
     })
-
-    function IsEmpty(obj) {
-        for(let key in obj) {
-            if(key === 'label' && obj['label'] !== "") {
-                return true;
-            }
-        return false;
-        }
-    }
 
     return (
         <ul className="app-list list-group">

@@ -1,7 +1,10 @@
 .app-header {
-  align-items: flex-end;
+  align-items: center;
   justify-content: space-between;
+}
 
+.sub-header {
+  /* display: flex; */
 }
 
 .app-header h1 {
