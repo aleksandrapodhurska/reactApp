@@ -13,14 +13,15 @@ export default class App extends Component {
         super(props);
         this.state = {
             data: [
-                {label: 'Going to learn React', important: true, id: 1},
-                {label: 'Травка зеленеет, солнышко блестит', important: false, id: 2},
-                {label: 'Keep calm and carry on', important: false, id: 3},
+                {label: 'Going to learn React', important: true, id: `${this.getId()}` },
+                {label: 'Травка зеленеет, солнышко блестит', important: false, id: `${this.getId()}`},
+                {label: 'Keep calm and carry on', important: false, id: `${this.getId()}`},
             ]
         };
         this.deleteItem = this.deleteItem.bind(this);
         this.addItem = this.addItem.bind(this);
         this.newId = 4;
+        this.getId = this.getId.apply(this);
     }
     deleteItem(id) {
         this.setState(({data}) => {
@@ -34,16 +35,31 @@ export default class App extends Component {
         const newItem = {
             label: body,
             important: false,
-            id: this.newId++
+            id: this.getId 
         }
         this.setState(({data}) => {
             const newArr = [...data, newItem];
+            console.log(newArr);
             return {
                 data: newArr
             }
         })
     }
-
+    getId() {
+            const arr = [
+                'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', 0, 1, 2, 3, 4, 5, 6, 7, 8, 9
+            ];
+            let id = '';
+            
+            for(let i = ''; i < 7; i++) {
+                id += arr[getRandomSymbol()];
+            }
+            
+            function getRandomSymbol() {
+                return Math.floor(Math.random() * arr.length);
+            }
+            return id;
+    }
     render() {
         return (
             <div className="app">
